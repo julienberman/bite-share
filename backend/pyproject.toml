@@ -1,0 +1,36 @@
+[project]
+name = "project-template-backend"
+version = "0.1.0"
+description = "Backend for project-template"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+  "fastapi==0.135.1",
+  "motor==3.7.1",
+  "uvicorn[standard]==0.41.0",
+  "pydantic==2.12.5",
+  "pydantic-settings==2.13.1"
+]
+
+[dependency-groups]
+dev = [
+  "pytest==9.0.2",
+  "httpx==0.28.1",
+  "ruff==0.15.6",
+  "mypy==1.19.1"
+]
+
+[tool.ruff]
+line-length = 79
+target-version = "py311"
+force-exclude = true
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = false
+warn_unused_configs = true
+explicit_package_bases = true
+plugins = ["pydantic.mypy"]

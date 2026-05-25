@@ -1,0 +1,11 @@
+.DS_Store
+node_modules
+.next
+out
+build
+dist
+coverage
+.vercel
+*.log
+.pnpm-debug.log*
+tsconfig.tsbuildinfo
