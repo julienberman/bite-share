@@ -20,9 +20,9 @@ Commands must be run from the repository root.
 
 ## Testing
 
-- `docker compose run --rm backend uv run pytest tests` runs backend tests.
-- Frontend test scaffolding exists under `frontend/tests/` and is not yet wired
-  into a frontend package script.
+- Automated tests are intentionally not wired into CI for the prototype phase.
+- Run focused local tests manually when adding test coverage in a future work
+  item.
 
 
 ## Lint
@@ -60,7 +60,5 @@ Commands must be run from the repository root.
 - `docker compose logs -f frontend` tails frontend container logs.
 - `docker compose logs -f database` tails MongoDB container logs.
 - `docker compose logs -f redis` tails Redis container logs.
-- `docker compose exec backend uv run pytest tests` runs backend tests inside
-  an already-running backend container.
 - `docker compose exec frontend pnpm lint` runs frontend lint inside an
   already-running frontend container.

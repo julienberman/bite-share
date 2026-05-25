@@ -1,62 +1,53 @@
-# Project Template
+# Bite Share
 
-This repository is a full-stack template with a minimal working scaffold:
-- Next.js frontend (`frontend/`)
+Bite Share is a simple prototype for splitting a night out with friends. A user
+uploads receipt images, an LLM extracts receipt items, the user corrects the
+items and assigns people to what they consumed, and the backend calculates the
+split.
+
+The current prototype uses:
+- Next.js App Router frontend (`frontend/`)
 - FastAPI backend (`backend/`)
-- MongoDB database (`database` service in Docker Compose)
-- Redis cache (`redis` service in Docker Compose)
+- UploadThing for receipt image upload
+- OpenAI vision for receipt extraction
+- MongoDB and Redis services reserved for future persistence and cache work
 
 
 ## Quickstart
 
-1. Use this template on GitHub and clone your new repository.
-2. Run the rename script from the repository root:
-
-```bash
-./init_template.sh your-project-slug
-```
-
-3. Copy environment variables:
+1. Copy environment variables:
 
 ```bash
 cp .env.example .env
 ```
 
-4. Start the full stack:
+2. Fill in required local secrets in `.env`:
+- `OPENAI_API_KEY`
+- `UPLOADTHING_TOKEN`
+
+3. Start the full stack:
 
 ```bash
 docker compose up --build
 ```
 
-5. Verify services:
+4. Verify services:
 - Frontend: `http://localhost:3000`
 - Backend health: `http://localhost:8000/health`
 
-6. Set up for local development (if desired):
+5. Set up for local development outside Docker, if desired:
 - Frontend: `cd frontend && pnpm install`
 - Backend: `cd backend && uv sync`
-
-## Rename Guidance
-
-This template uses the token `bite-share` across package names, container
-names, and docs.
-
-- `init_template.sh` replaces `bite-share` in text files with the
-  slug you pass.
-- It updates values like `bite-share-backend` and
-  `bite-share-database` automatically.
-- It skips common generated and binary paths.
-
-Recommended slug format: lowercase letters, numbers, and hyphens.
 
 
 ## What Works Out Of The Box
 
 - `docker compose up --build` launches database, redis, backend, and frontend.
-- Frontend serves a minimal homepage from `frontend/src/app/page.tsx`.
-- Backend serves `/health` from `backend/app/api/endpoints/health.py`.
-- Backend runtime is configured with database-agnostic environment keys:
-  `DATABASE_URL` and `DATABASE_NAME`.
+- Frontend serves the single-page prototype from `frontend/src/app/page.tsx`.
+- UploadThing receives receipt image uploads at `/api/uploadthing`.
+- Backend serves `/receipts/parse` for OpenAI receipt extraction.
+- Backend serves `/bills/split` for bill split calculation.
+- Backend serves `/health` for service health.
 
 
 ## Clerk Variables
@@ -67,18 +58,19 @@ kept in `.env.example` for future auth integration.
 Auth is not wired in this scaffold yet.
 
 
-## Boilerplate Generation
+## UI Components
 
-Shadcn components are generated only when needed.
+Shared UI components live under `frontend/src/components`. Generated shadcn
+components live under `frontend/src/components/ui`.
 
 From `frontend/`:
 
 ```bash
-pnpm dlx shadcn@latest init
-pnpm dlx shadcn@latest add button card input form
+pnpm dlx shadcn@latest add component-name
 ```
 
-Add components incrementally instead of generating a large UI set up front.
+Add shadcn components incrementally instead of generating a large UI set up
+front.
 
 
 ## Production Note

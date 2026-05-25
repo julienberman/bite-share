@@ -10,6 +10,9 @@ class Settings(BaseSettings):
     redis_url: str
     api_host: str
     port: int
+    frontend_origin: str = "http://localhost:3000"
+    openai_api_key: str
+    openai_model: str = "gpt-4o-2024-08-06"
     next_public_clerk_publishable_key: Optional[str] = None
     clerk_secret_key: Optional[str] = None
 

@@ -10,7 +10,7 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 FROM base AS dependencies
 
-RUN --mount=type=cache,id=s/a12d5666-07e4-4f62-a76e-50fc61e055ac,target=/root/.local/share/pnpm/store \
+RUN --mount=type=cache,id=s/9acca102-6fab-4264-9895-977bbb4b576b,target=/root/.local/share/pnpm/store \
   pnpm install --frozen-lockfile
 
 FROM base AS dev
