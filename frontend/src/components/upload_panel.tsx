@@ -19,17 +19,27 @@ export function UploadPanel({
         appearance={{
           allowedContent: "hidden",
           button:
-            "h-full w-full rounded-none border-0 bg-transparent text-lg uppercase tracking-[0.18em] text-foreground shadow-none after:bg-foreground hover:bg-transparent",
+            "h-full w-full rounded-none border border-border bg-card text-lg uppercase tracking-[0.18em] text-foreground shadow-none after:bg-foreground hover:bg-card",
           container: "h-full w-full",
         }}
         content={{
-          button: isParsing ? "Reading" : "Upload receipt.",
+          button({ ready, isUploading }) {
+            if (!ready) {
+              return "Getting ready";
+            }
+
+            if (isUploading) {
+              return "Uploading";
+            }
+
+            return isParsing ? "Reading" : "Upload receipt.";
+          },
         }}
         endpoint="receiptImage"
         onClientUploadComplete={(files) => {
           const file = files[0];
           if (file) {
-            onReceiptUploaded(file.url, file.name);
+            onReceiptUploaded(file.ufsUrl, file.name);
           }
         }}
         onUploadError={(error) => {

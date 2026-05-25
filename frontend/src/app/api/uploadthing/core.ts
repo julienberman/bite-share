@@ -8,12 +8,17 @@ export const uploadRouter = {
       maxFileCount: 1,
       maxFileSize: "8MB",
     },
-  }).onUploadComplete(({ file }) => {
-    return {
-      name: file.name,
-      url: file.ufsUrl,
-    };
-  }),
+  })
+    .middleware(() => {
+      return { uploadedBy: "anonymous" };
+    })
+    .onUploadComplete(({ file, metadata }) => {
+      return {
+        name: file.name,
+        uploadedBy: metadata.uploadedBy,
+        url: file.ufsUrl,
+      };
+    }),
 } satisfies FileRouter;
 
 export type UploadRouter = typeof uploadRouter;

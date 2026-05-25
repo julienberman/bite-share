@@ -1,3 +1,4 @@
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import type { Metadata } from "next";
 import {
   Geist,
@@ -5,6 +6,9 @@ import {
   JetBrains_Mono,
   Public_Sans,
 } from "next/font/google";
+import { extractRouterConfig } from "uploadthing/server";
+
+import { uploadRouter } from "@/app/api/uploadthing/core";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 
@@ -43,6 +47,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <NextSSRPlugin routerConfig={extractRouterConfig(uploadRouter)} />
         {children}
       </body>
     </html>
