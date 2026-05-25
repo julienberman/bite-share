@@ -9,8 +9,10 @@ import {
 import { extractRouterConfig } from "uploadthing/server";
 
 import { uploadRouter } from "@/app/api/uploadthing/core";
-import "./globals.css";
+import { Button } from "@/components/ui/button";
+import { Link } from "@/components/ui/link";
 import { cn } from "@/lib/utils";
+import "./globals.css";
 
 const publicSans = Public_Sans({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -47,8 +49,27 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <NextSSRPlugin routerConfig={extractRouterConfig(uploadRouter)} />
-        {children}
+        <div className="mx-auto min-h-screen w-full max-w-6xl px-6 sm:px-10">
+          <header className="sticky top-0 z-50 grid grid-cols-[1fr_auto_1fr] items-center gap-6 border-b border-border bg-background/90 py-5 backdrop-blur supports-[backdrop-filter]:bg-background/70">
+            <Link
+              href="/"
+              className="text-lg font-bold tracking-tight text-foreground"
+            >
+              BiteShare
+            </Link>
+            <p className="hidden text-center text-xs uppercase tracking-[0.18em] text-muted-foreground sm:block">
+              Split a night out with friends. No receipt math.
+            </p>
+
+            <nav className="flex items-center justify-end gap-2">
+              <Button asChild size="nav" variant="ghost">
+                <a href="/sign-in">Sign In</a>
+              </Button>
+            </nav>
+          </header>
+          <NextSSRPlugin routerConfig={extractRouterConfig(uploadRouter)} />
+          <div className="py-8">{children}</div>
+        </div>
       </body>
     </html>
   );

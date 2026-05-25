@@ -268,12 +268,6 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <nav className="flex h-16 items-center justify-end border-b border-border px-5 sm:px-8">
-        <Button type="button" variant="outline">
-          Sign In
-        </Button>
-      </nav>
-
       <div className="grid gap-6 px-5 py-8 sm:px-8 lg:grid-cols-[1fr_2fr_1fr] lg:gap-8">
         <section className="lg:min-h-[calc(100vh-8rem)]">
           <h1 className="font-semibold uppercase leading-none tracking-[0.04em] text-foreground">
