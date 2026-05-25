@@ -20,7 +20,7 @@ async def app_lifespan(app: FastAPI):
 
 def create_app() -> FastAPI:
     app = FastAPI(
-        title="project-template-backend",
+        title="bite-share-backend",
         lifespan=app_lifespan,
     )
     app.include_router(health.router)

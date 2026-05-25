@@ -26,7 +26,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "project-template",
+  title: "bite-share",
   description: "Full-stack project template scaffold",
 };
 

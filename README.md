@@ -38,13 +38,13 @@ docker compose up --build
 
 ## Rename Guidance
 
-This template uses the token `project-template` across package names, container
+This template uses the token `bite-share` across package names, container
 names, and docs.
 
-- `init_template.sh` replaces `project-template` in text files with the
+- `init_template.sh` replaces `bite-share` in text files with the
   slug you pass.
-- It updates values like `project-template-backend` and
-  `project-template-database` automatically.
+- It updates values like `bite-share-backend` and
+  `bite-share-database` automatically.
 - It skips common generated and binary paths.
 
 Recommended slug format: lowercase letters, numbers, and hyphens.

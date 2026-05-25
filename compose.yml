@@ -2,7 +2,7 @@ services:
 
   database:
     image: mongo:8
-    container_name: project-template-database
+    container_name: bite-share-database
     healthcheck:
       test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
       interval: 10s
@@ -14,7 +14,7 @@ services:
 
   redis:
     image: redis:7
-    container_name: project-template-redis
+    container_name: bite-share-redis
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 10s
@@ -26,7 +26,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: project-template-backend
+    container_name: bite-share-backend
     depends_on:
       database:
         condition: service_healthy
@@ -53,7 +53,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       target: dev
-    container_name: project-template-frontend
+    container_name: bite-share-frontend
     depends_on:
       backend:
         condition: service_started

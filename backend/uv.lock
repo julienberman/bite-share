@@ -275,7 +275,7 @@ wheels = [
 ]
 
 [[package]]
-name = "project-template-backend"
+name = "bite-share-backend"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
