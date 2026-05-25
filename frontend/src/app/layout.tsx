@@ -10,10 +10,7 @@ import { cn } from "@/lib/utils";
 
 const publicSans = Public_Sans({ subsets: ["latin"], variable: "--font-sans" });
 
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-});
+const jetbrainsMono = JetBrains_Mono({subsets:['latin'],variable:'--font-mono'});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,7 +35,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn(jetbrainsMono.variable, "font-sans", publicSans.variable)}
+      className={cn( publicSans.variable, "font-mono", jetbrainsMono.variable)}
     >
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
