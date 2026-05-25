@@ -14,32 +14,30 @@ export function UploadPanel({
   onReceiptUploaded,
 }: UploadPanelProps) {
   return (
-    <section className="border border-border bg-card p-4 text-card-foreground">
-      <div className="flex flex-col gap-1">
-        <h2 className="text-base font-semibold tracking-tight">
-          Upload receipts
-        </h2>
-        <p className="text-xs text-muted-foreground">
-          Upload one receipt image at a time. Each receipt adds items to this
-          bill.
-        </p>
-      </div>
-      <div className="mt-4">
-        <UploadButton
-          endpoint="receiptImage"
-          onClientUploadComplete={(files) => {
-            const file = files[0];
-            if (file) {
-              onReceiptUploaded(file.url, file.name);
-            }
-          }}
-          onUploadError={(error) => {
-            window.alert(error.message);
-          }}
-        />
-      </div>
+    <section className="aspect-square border border-border bg-card p-3 text-card-foreground">
+      <UploadButton
+        appearance={{
+          allowedContent: "hidden",
+          button:
+            "h-full w-full rounded-none border-0 bg-transparent text-lg uppercase tracking-[0.18em] text-foreground shadow-none after:bg-foreground hover:bg-transparent",
+          container: "h-full w-full",
+        }}
+        content={{
+          button: isParsing ? "Reading" : "Upload receipt.",
+        }}
+        endpoint="receiptImage"
+        onClientUploadComplete={(files) => {
+          const file = files[0];
+          if (file) {
+            onReceiptUploaded(file.url, file.name);
+          }
+        }}
+        onUploadError={(error) => {
+          window.alert(error.message);
+        }}
+      />
       {isParsing || message ? (
-        <p className="mt-3 text-xs text-muted-foreground">
+        <p className="mt-2 truncate text-xs uppercase tracking-[0.18em] text-muted-foreground">
           {isParsing ? "Reading receipt..." : message}
         </p>
       ) : null}

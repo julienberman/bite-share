@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Plus } from "@phosphor-icons/react";
 
 import { Item } from "@/components/item";
 import { Person } from "@/components/person";
@@ -21,6 +22,7 @@ type BillItem = {
   id: string;
   name: string;
   price: string;
+  type: "food" | "drink";
 };
 
 type Split = {
@@ -150,6 +152,7 @@ export default function Home() {
         id: crypto.randomUUID(),
         name: "New item",
         price: "0.00",
+        type: "food",
       },
     ]);
   }
@@ -187,6 +190,7 @@ export default function Home() {
       id: crypto.randomUUID(),
       name: item.name,
       price: normalizeMoney(String(item.price)),
+      type: "food" as const,
     }));
 
     setItems((currentItems) => [...currentItems, ...parsedItems]);
@@ -251,106 +255,76 @@ export default function Home() {
     );
   }
 
+  function updateItemType(itemId: string, type: "food" | "drink") {
+    setItems((currentItems) =>
+      currentItems.map((item) => {
+        return item.id === itemId ? { ...item, type } : item;
+      }),
+    );
+  }
+
   const visibleSplits = items.length === 0 ? [] : splits;
+  const suggestedFriendName = newConsumerName.trim();
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-6 px-4 py-6 sm:px-6 lg:px-8">
-      <header className="flex flex-col gap-2 border-b border-border pb-5">
-        <p className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-          bite-share
-        </p>
-        <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-end">
-          <div>
-            <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-              Split the night without doing receipt math.
-            </h1>
-            <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-              Upload receipts, fix anything the model misses, assign people to
-              what they had, and let the backend calculate the split.
-            </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-muted-foreground">Bill total</span>
-            <Input
-              className="w-32"
-              inputMode="decimal"
-              value={total}
-              onChange={(event) => setTotal(event.target.value)}
+    <main className="min-h-screen bg-background text-foreground">
+      <nav className="flex h-16 items-center justify-end border-b border-border px-5 sm:px-8">
+        <Button type="button" variant="outline">
+          Sign In
+        </Button>
+      </nav>
+
+      <div className="grid gap-6 px-5 py-8 sm:px-8 lg:grid-cols-[1fr_2fr_1fr] lg:gap-8">
+        <section className="lg:min-h-[calc(100vh-8rem)]">
+          <h1 className="font-semibold uppercase leading-none tracking-[0.04em] text-foreground">
+            <span className="text-[clamp(4rem,9vw,8.5rem)]">B</span>
+            <span className="align-[0.18em] text-[clamp(2rem,4.5vw,4.2rem)] tracking-[0.18em]">
+              ITE
+            </span>
+            <br />
+            <span className="text-[clamp(4rem,9vw,8.5rem)]">S</span>
+            <span className="align-[0.18em] text-[clamp(2rem,4.5vw,4.2rem)] tracking-[0.18em]">
+              HARE
+            </span>
+          </h1>
+          <p className="mt-5 max-w-72 text-lg leading-snug">
+            Split a night out with friends. No receipt math.
+          </p>
+        </section>
+
+        <section className="flex flex-col gap-5">
+          <header className="flex items-end justify-between gap-4">
+            <h2 className="text-xl font-semibold uppercase tracking-[0.14em]">
+              Add items to the bill.
+            </h2>
+            <label className="flex items-center gap-2 text-xs uppercase tracking-[0.18em]">
+              Total
+              <Input
+                className="h-11 w-28 text-base"
+                inputMode="decimal"
+                value={total}
+                onChange={(event) => setTotal(event.target.value)}
+              />
+            </label>
+          </header>
+
+          <div className="grid grid-cols-2 gap-4">
+            <Button
+              className="aspect-square h-auto flex-col gap-4 bg-card text-foreground hover:bg-card"
+              type="button"
+              variant="outline"
+              onClick={addItem}
+            >
+              <Plus aria-hidden="true" className="size-16" />
+            </Button>
+            <UploadPanel
+              isParsing={isParsing}
+              message={statusMessage}
+              onReceiptUploaded={handleReceiptUploaded}
             />
           </div>
-        </div>
-      </header>
 
-      <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
-        <div className="flex flex-col gap-5">
-          <UploadPanel
-            isParsing={isParsing}
-            message={statusMessage}
-            onReceiptUploaded={handleReceiptUploaded}
-          />
-
-          <section className="border border-border bg-card p-4 text-card-foreground">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <h2 className="text-base font-semibold tracking-tight">
-                  People
-                </h2>
-                <p className="text-xs text-muted-foreground">
-                  Drag a person to an item, or select a person and tap an item.
-                </p>
-              </div>
-              <div className="flex gap-2">
-                <Input
-                  aria-label="Consumer name"
-                  placeholder="Friend name"
-                  value={newConsumerName}
-                  onChange={(event) => setNewConsumerName(event.target.value)}
-                  onKeyDown={(event) => {
-                    if (event.key === "Enter") {
-                      addConsumer();
-                    }
-                  }}
-                />
-                <Button type="button" onClick={addConsumer}>
-                  Add
-                </Button>
-              </div>
-            </div>
-            <div className="mt-4 flex flex-wrap gap-2">
-              {consumers.map((consumer) => (
-                <Person
-                  key={consumer.id}
-                  consumer={consumer}
-                  isSelected={selectedConsumerId === consumer.id}
-                  onSelect={(consumerId) =>
-                    setSelectedConsumerId(
-                      selectedConsumerId === consumerId ? null : consumerId,
-                    )
-                  }
-                />
-              ))}
-            </div>
-          </section>
-
-          <section className="flex flex-col gap-3">
-            <div className="flex items-center justify-between gap-3">
-              <div>
-                <h2 className="text-base font-semibold tracking-tight">
-                  Items
-                </h2>
-                <p className="text-xs text-muted-foreground">
-                  Edit item names and prices before splitting.
-                </p>
-              </div>
-              <Button type="button" variant="outline" onClick={addItem}>
-                Add item
-              </Button>
-            </div>
-            {items.length === 0 ? (
-              <div className="border border-dashed border-border p-6 text-sm text-muted-foreground">
-                Upload a receipt or add an item manually to start.
-              </div>
-            ) : null}
+          <div className="grid gap-4 sm:grid-cols-2">
             {items.map((item) => (
               <Item
                 key={item.id}
@@ -362,16 +336,60 @@ export default function Home() {
                 onPriceChange={updateItemPrice}
                 onRemove={removeItem}
                 onToggleConsumer={toggleConsumer}
+                onTypeChange={updateItemType}
               />
             ))}
-          </section>
-        </div>
+          </div>
+        </section>
 
-        <SplitSummary
-          isLoading={isSplitting}
-          splits={visibleSplits}
-          total={total}
-        />
+        <section className="flex flex-col gap-4">
+          <h2 className="text-xl font-semibold uppercase tracking-[0.14em]">
+            Add friends.
+          </h2>
+          <div className="relative">
+            <Input
+              aria-label="Friend name"
+              className="h-11 text-base"
+              placeholder="Friend name"
+              value={newConsumerName}
+              onChange={(event) => setNewConsumerName(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Enter") {
+                  addConsumer();
+                }
+              }}
+            />
+            {suggestedFriendName ? (
+              <Button
+                className="mt-2 h-11 w-full justify-start uppercase tracking-[0.16em]"
+                type="button"
+                variant="secondary"
+                onClick={addConsumer}
+              >
+                Add {suggestedFriendName}
+              </Button>
+            ) : null}
+          </div>
+          <div className="flex flex-col gap-3">
+            {consumers.map((consumer) => (
+              <Person
+                key={consumer.id}
+                consumer={consumer}
+                isSelected={selectedConsumerId === consumer.id}
+                onSelect={(consumerId) =>
+                  setSelectedConsumerId(
+                    selectedConsumerId === consumerId ? null : consumerId,
+                  )
+                }
+              />
+            ))}
+          </div>
+          <SplitSummary
+            isLoading={isSplitting}
+            splits={visibleSplits}
+            total={total}
+          />
+        </section>
       </div>
     </main>
   );

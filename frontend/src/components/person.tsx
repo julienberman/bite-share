@@ -15,6 +15,7 @@ export function Person({ consumer, isSelected, onSelect }: PersonProps) {
   return (
     <Button
       draggable
+      className="h-12 w-full justify-start border-border px-4 text-sm uppercase tracking-[0.2em]"
       type="button"
       variant={isSelected ? "default" : "outline"}
       onClick={() => onSelect(consumer.id)}
