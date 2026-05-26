@@ -5,125 +5,125 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-mono);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
-  --font-heading: var(--font-mono);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --font-sans: var(--font-sans);
+    --font-mono: var(--font-mono);
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
+    --radius-2xl: calc(var(--radius) * 1.8);
+    --radius-3xl: calc(var(--radius) * 2.2);
+    --radius-4xl: calc(var(--radius) * 2.6);
+    --font-heading: var(--font-mono);
 }
 
 :root {
-  --white: oklch(1 0 0);
-  --very-light: oklch(0.96 0.025 79);
-  --light: oklch(0.82 0.055 69);
-  --dark: oklch(0.24 0.045 48);
-  --card: var(--very-light);
-  --card-foreground: var(--dark);
-  --popover: var(--white);
-  --popover-foreground: var(--dark);
-  --primary: var(--dark);
-  --primary-foreground: var(--white);
-  --secondary: var(--light);
-  --secondary-foreground: var(--dark);
-  --muted: var(--very-light);
-  --muted-foreground: var(--dark);
-  --accent: var(--light);
-  --accent-foreground: var(--dark);
-  --destructive: var(--dark);
-  --border: var(--dark);
-  --input: var(--dark);
-  --ring: var(--dark);
-  --chart-1: var(--light);
-  --chart-2: var(--dark);
-  --chart-3: var(--very-light);
-  --chart-4: var(--light);
-  --chart-5: var(--dark);
-  --radius: 0.625rem;
-  --sidebar: var(--very-light);
-  --sidebar-foreground: var(--dark);
-  --sidebar-primary: var(--dark);
-  --sidebar-primary-foreground: var(--white);
-  --sidebar-accent: var(--light);
-  --sidebar-accent-foreground: var(--dark);
-  --sidebar-border: var(--dark);
-  --sidebar-ring: var(--dark);
-  --background: var(--white);
-  --foreground: var(--dark);
+    --white: oklch(1 0 0);
+    --very-light: oklch(0.96 0.025 79);
+    --light: oklch(0.82 0.055 69);
+    --dark: oklch(0.24 0.045 48);
+    --card: var(--very-light);
+    --card-foreground: var(--dark);
+    --popover: var(--white);
+    --popover-foreground: var(--dark);
+    --primary: var(--dark);
+    --primary-foreground: var(--white);
+    --secondary: var(--light);
+    --secondary-foreground: var(--dark);
+    --muted: var(--very-light);
+    --muted-foreground: var(--dark);
+    --accent: var(--light);
+    --accent-foreground: var(--dark);
+    --destructive: var(--dark);
+    --border: var(--dark);
+    --input: var(--dark);
+    --ring: var(--dark);
+    --chart-1: var(--light);
+    --chart-2: var(--dark);
+    --chart-3: var(--very-light);
+    --chart-4: var(--light);
+    --chart-5: var(--dark);
+    --radius: 0.625rem;
+    --sidebar: var(--very-light);
+    --sidebar-foreground: var(--dark);
+    --sidebar-primary: var(--dark);
+    --sidebar-primary-foreground: var(--white);
+    --sidebar-accent: var(--light);
+    --sidebar-accent-foreground: var(--dark);
+    --sidebar-border: var(--dark);
+    --sidebar-ring: var(--dark);
+    --background: var(--white);
+    --foreground: var(--dark);
 }
 
 .dark {
-  --background: var(--dark);
-  --foreground: var(--white);
-  --card: var(--dark);
-  --card-foreground: var(--white);
-  --popover: var(--dark);
-  --popover-foreground: var(--white);
-  --primary: var(--white);
-  --primary-foreground: var(--dark);
-  --secondary: var(--light);
-  --secondary-foreground: var(--dark);
-  --muted: var(--dark);
-  --muted-foreground: var(--white);
-  --accent: var(--light);
-  --accent-foreground: var(--dark);
-  --destructive: var(--white);
-  --border: var(--white);
-  --input: var(--white);
-  --ring: var(--white);
-  --sidebar: var(--dark);
-  --sidebar-foreground: var(--white);
-  --sidebar-primary: var(--white);
-  --sidebar-primary-foreground: var(--dark);
-  --sidebar-accent: var(--light);
-  --sidebar-accent-foreground: var(--dark);
-  --sidebar-border: var(--white);
-  --sidebar-ring: var(--white);
+    --background: var(--dark);
+    --foreground: var(--white);
+    --card: var(--dark);
+    --card-foreground: var(--white);
+    --popover: var(--dark);
+    --popover-foreground: var(--white);
+    --primary: var(--white);
+    --primary-foreground: var(--dark);
+    --secondary: var(--light);
+    --secondary-foreground: var(--dark);
+    --muted: var(--dark);
+    --muted-foreground: var(--white);
+    --accent: var(--light);
+    --accent-foreground: var(--dark);
+    --destructive: var(--white);
+    --border: var(--white);
+    --input: var(--white);
+    --ring: var(--white);
+    --sidebar: var(--dark);
+    --sidebar-foreground: var(--white);
+    --sidebar-primary: var(--white);
+    --sidebar-primary-foreground: var(--dark);
+    --sidebar-accent: var(--light);
+    --sidebar-accent-foreground: var(--dark);
+    --sidebar-border: var(--white);
+    --sidebar-ring: var(--white);
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-  html {
-    @apply font-mono;
-  }
+    * {
+        @apply border-border outline-ring/50;
+    }
+    body {
+        @apply bg-background text-foreground;
+    }
+    html {
+        @apply font-mono;
+    }
 }

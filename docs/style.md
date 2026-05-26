@@ -25,6 +25,8 @@ This document defines naming, formatting, and code-organization conventions.
 
 ## Frontend TypeScript Style
 
+- Format frontend code with Prettier using four-space indentation as configured
+  in `frontend/.prettierrc.json`.
 - Use path alias `@/*` mapped to `frontend/src/*`.
 - Keep feature code under `frontend/src/features/<feature_name>` when features
   are introduced.
