@@ -18,10 +18,16 @@ export function SearchConsumers() {
             <Input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                        e.preventDefault();
+                        handleSelect();
+                    }
+                }}
                 placeholder="Add friend..."
             />
             {query.trim() && (
-                <ul className="absolute z-10 mt-1 w-full rounded-md border bg-popover shadow-md">
+                <ul className="absolute z-10 mt-1 w-full rounded-lg border bg-popover shadow-md">
                     <li
                         onClick={handleSelect}
                         className="cursor-pointer px-3 py-2 text-sm hover:bg-accent"

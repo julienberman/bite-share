@@ -36,6 +36,9 @@ bite-share/
     |   |   |   |-- consumer_chip.tsx
     |   |   |   |-- consumer_detail.tsx
     |   |   |   `-- search_consumers.tsx
+    |   |   |-- split/
+    |   |   |   |-- split_card.tsx
+    |   |   |   `-- split_detail.tsx
     |   |   |-- upload_panel.tsx
     |   |   `-- ui/
     |   |       `-- money_input.tsx
@@ -56,6 +59,7 @@ bite-share/
 - `frontend/`: Next.js app and frontend dependencies.
 - `frontend/src/app/`: App Router layout, global CSS, and home page.
 - `frontend/src/components/`: shared UI and feature components.
+- `frontend/src/components/split/`: split summary card and editable total modal.
 - `frontend/src/components/ui/`: shadcn-style primitives.
 - `frontend/src/components/ui/money_input.tsx`: cents-keypad currency input.
 - `frontend/src/lib/`: shared frontend utilities and domain logic.

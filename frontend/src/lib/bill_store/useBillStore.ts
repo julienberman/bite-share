@@ -10,7 +10,7 @@ type BillStore = {
     removeConsumer: (id: string) => void;
     updateConsumer: (id: string, patch: Partial<Omit<Person, "id">>) => void;
 
-    addItem: () => void;
+    addItem: () => string;
     removeItem: (id: string) => void;
     setItemName: (id: string, name: string) => void;
     setItemPrice: (id: string, priceCents: number) => void;
@@ -21,7 +21,7 @@ type BillStore = {
 };
 
 export const useBillStore = create<BillStore>((set) => ({
-    consumers: [],
+    consumers: [{ id: "me", name: "Me" }],
     items: [],
     totalCents: 0,
 
@@ -46,18 +46,23 @@ export const useBillStore = create<BillStore>((set) => ({
             ),
         })),
 
-    addItem: () =>
+    addItem: () => {
+        const id = crypto.randomUUID();
+
         set((s) => ({
             items: [
                 ...s.items,
                 {
-                    id: crypto.randomUUID(),
+                    id,
                     name: "",
                     priceCents: 0,
                     consumerIds: [],
                 },
             ],
-        })),
+        }));
+
+        return id;
+    },
 
     removeItem: (id) =>
         set((s) => ({ items: s.items.filter((i) => i.id !== id) })),

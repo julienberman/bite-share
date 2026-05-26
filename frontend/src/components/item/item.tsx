@@ -42,7 +42,7 @@ export function ItemCard({ item, consumers, onClick }: Props) {
                 type="button"
                 aria-label={`Delete ${item.name || "item"}`}
                 onClick={handleRemove}
-                className="absolute right-2 top-2 inline-flex size-7 items-center justify-center text-muted-foreground transition-colors hover:bg-background hover:text-foreground"
+                className="absolute right-2 top-2 inline-flex size-7 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-background hover:text-foreground"
             >
                 <svg
                     aria-hidden="true"

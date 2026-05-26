@@ -41,6 +41,7 @@ This document defines naming, formatting, and code-organization conventions.
 - Use only the four core palette variables `--white`, `--very-light`, `--light`,
   and `--dark`; map semantic framework tokens back to these colors.
 - Prefer utility classes directly in components for simple styling.
+- Use rounded corners on interactive controls, cards, modal panels, and popovers.
 - Extract shared visual primitives into `frontend/src/components/ui` when class
   sets repeat.
 - Keep color and typography tokens in CSS custom properties in

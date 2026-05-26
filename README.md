@@ -29,8 +29,9 @@ docker compose up --build
 ## What Works Out Of The Box
 
 - Frontend serves the single-page prototype from `frontend/src/app/page.tsx`.
-- Bill state stays in the browser session.
+- Bill state stays in the browser session and starts with a default `Me` person.
 - Money entry uses cents-keypad behavior for faster receipt entry.
+- Person, item, and split details open in modals.
 - Split calculation runs locally in `frontend/src/lib/bill`.
 - No backend, database, receipt upload, authentication, or external API is
   required for the current prototype.

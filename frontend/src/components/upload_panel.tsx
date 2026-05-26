@@ -14,11 +14,11 @@ export function UploadPanel({
     onReceiptUploaded,
 }: UploadPanelProps) {
     return (
-        <section className="aspect-square border border-border bg-card p-3 text-card-foreground">
+        <section className="aspect-square rounded-lg border border-border bg-card p-3 text-card-foreground">
             <UploadButton
                 appearance={{
                     allowedContent: "hidden",
-                    button: "h-full w-full rounded-none border border-border bg-card text-lg uppercase tracking-[0.18em] text-foreground shadow-none after:bg-foreground hover:bg-card",
+                    button: "h-full w-full rounded-lg border border-border bg-card text-lg uppercase tracking-[0.18em] text-foreground shadow-none after:bg-foreground hover:bg-card",
                     container: "h-full w-full",
                 }}
                 content={{

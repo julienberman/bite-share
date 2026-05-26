@@ -15,6 +15,7 @@ MongoDB, Redis, authentication, receipt upload, and backend APIs are future work
 
 - Frontend state owns people, items, assignments, and optional final total during
   the prototype session through the Zustand bill store.
+- New prototype sessions start with a default `Me` person.
 - `frontend/src/lib/bill` owns split calculation logic and domain types.
 - Future backend services may own persistence, authentication, receipt parsing,
   and shared bill workflows.

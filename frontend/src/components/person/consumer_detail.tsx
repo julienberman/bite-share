@@ -18,6 +18,21 @@ export function ConsumerDetail({ person, onClose }: Props) {
     const [phone, setPhone] = useState(person.phone ?? "");
     const [venmo, setVenmo] = useState(person.venmo ?? "");
 
+    const handleEmailChange = (value: string) => {
+        setEmail(value);
+        updateConsumer(person.id, { email: value.trim() || undefined });
+    };
+
+    const handlePhoneChange = (value: string) => {
+        setPhone(value);
+        updateConsumer(person.id, { phone: value.trim() || undefined });
+    };
+
+    const handleVenmoChange = (value: string) => {
+        setVenmo(value);
+        updateConsumer(person.id, { venmo: value.trim() || undefined });
+    };
+
     const handleSave = () => {
         updateConsumer(person.id, {
             email: email.trim() || undefined,
@@ -29,13 +44,18 @@ export function ConsumerDetail({ person, onClose }: Props) {
 
     return (
         <div className="flex flex-col gap-4">
-            <h3 className="text-lg font-semibold">{person.name}</h3>
+            <div className="flex items-center justify-between gap-4">
+                <h3 className="text-lg font-semibold">{person.name}</h3>
+                <Button type="button" onClick={handleSave}>
+                    Save
+                </Button>
+            </div>
             <div className="flex flex-col gap-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
                     id="email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => handleEmailChange(e.target.value)}
                     placeholder="email@example.com"
                 />
             </div>
@@ -44,7 +64,7 @@ export function ConsumerDetail({ person, onClose }: Props) {
                 <Input
                     id="phone"
                     value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
+                    onChange={(e) => handlePhoneChange(e.target.value)}
                     placeholder="555-555-5555"
                 />
             </div>
@@ -53,15 +73,9 @@ export function ConsumerDetail({ person, onClose }: Props) {
                 <Input
                     id="venmo"
                     value={venmo}
-                    onChange={(e) => setVenmo(e.target.value)}
+                    onChange={(e) => handleVenmoChange(e.target.value)}
                     placeholder="@username"
                 />
-            </div>
-            <div className="flex gap-2">
-                <Button onClick={handleSave}>Save</Button>
-                <Button variant="outline" onClick={onClose}>
-                    Cancel
-                </Button>
             </div>
         </div>
     );
