@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ConsumerDetail } from "@/components/ConsumerDetail";
+import { ConsumerDetail } from "@/components/person/consumer_detail";
 import type { Person } from "@/lib/bill";
 
 type Props = {

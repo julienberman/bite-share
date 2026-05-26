@@ -1,7 +1,7 @@
 "use client";
 
-import { useBillStore } from "@/store/useBillStore";
 import { Card } from "@/components/ui/card";
+import { useBillStore } from "@/lib/bill_store/useBillStore";
 import type { Item, Person } from "@/lib/bill";
 
 type Props = {

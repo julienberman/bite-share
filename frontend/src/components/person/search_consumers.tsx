@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
-import { useBillStore } from "@/store/useBillStore";
 import { Input } from "@/components/ui/input";
+import { useBillStore } from "@/lib/bill_store/useBillStore";
 
 export function SearchConsumers() {
   const [query, setQuery] = useState("");

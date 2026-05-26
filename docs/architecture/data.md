@@ -14,8 +14,8 @@ MongoDB, Redis, authentication, receipt upload, and backend APIs are future work
 ## Data Ownership
 
 - Frontend state owns people, items, assignments, and optional final total during
-  the prototype session.
-- `frontend/src/lib/split_algorithm` owns split calculation logic.
+  the prototype session through the Zustand bill store.
+- `frontend/src/lib/bill` owns split calculation logic and domain types.
 - Future backend services may own persistence, authentication, receipt parsing,
   and shared bill workflows.
 

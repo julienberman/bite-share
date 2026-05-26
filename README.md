@@ -6,8 +6,8 @@ the final total with tax and tip.
 
 The current prototype uses:
 - Next.js App Router frontend (`frontend/`)
-- Tailwind CSS and shadcn-style UI primitives
-- A local split algorithm in `frontend/src/lib/split_algorithm`
+- Tailwind CSS, shadcn-style UI primitives, and Zustand state
+- A local split algorithm in `frontend/src/lib/bill`
 
 
 ## Quickstart
@@ -30,7 +30,7 @@ docker compose up --build
 
 - Frontend serves the single-page prototype from `frontend/src/app/page.tsx`.
 - Bill state stays in the browser session.
-- Split calculation runs locally in `frontend/src/lib/split_algorithm`.
+- Split calculation runs locally in `frontend/src/lib/bill`.
 - No backend, database, receipt upload, authentication, or external API is
   required for the current prototype.
 

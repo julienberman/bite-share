@@ -1,5 +1,19 @@
 import type { Bill } from "./types";
 
+export function canSplit(bill: Bill): boolean {
+  const subtotal = sum(bill.items.map((i) => i.priceCents));
+
+  return (
+    bill.consumers.length > 0 &&
+    bill.items.length > 0 &&
+    bill.totalCents > 0 &&
+    subtotal > 0 &&
+    bill.items.every(
+      (item) => item.priceCents > 0 && item.consumerIds.length > 0,
+    )
+  );
+}
+
 export function split(bill: Bill): Map<string, number> {
   const shares = new Map(bill.consumers.map((c) => [c.id, 0]));
   const subtotal = sum(bill.items.map((i) => i.priceCents));

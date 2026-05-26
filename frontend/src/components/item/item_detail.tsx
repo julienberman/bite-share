@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useBillStore } from "@/store/useBillStore";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useBillStore } from "@/lib/bill_store/useBillStore";
 import type { Item, Person } from "@/lib/bill";
 
 type Props = {
@@ -76,8 +76,12 @@ export function ItemDetail({ item, consumers, onClose }: Props) {
       </div>
       <div className="flex gap-2">
         <Button onClick={handleSave}>Save</Button>
-        <Button variant="outline" onClick={onClose}>Cancel</Button>
-        <Button variant="destructive" onClick={handleRemove}>Delete</Button>
+        <Button variant="outline" onClick={onClose}>
+          Cancel
+        </Button>
+        <Button variant="destructive" onClick={handleRemove}>
+          Delete
+        </Button>
       </div>
     </div>
   );

@@ -8,6 +8,7 @@ type BillStore = {
 
   addConsumer: (name: string) => void;
   removeConsumer: (id: string) => void;
+  updateConsumer: (id: string, patch: Partial<Omit<Person, "id">>) => void;
 
   addItem: () => void;
   removeItem: (id: string) => void;
@@ -36,6 +37,11 @@ export const useBillStore = create<BillStore>((set) => ({
         ...item,
         consumerIds: item.consumerIds.filter((cid) => cid !== id),
       })),
+    })),
+
+  updateConsumer: (id, patch) =>
+    set((s) => ({
+      consumers: s.consumers.map((c) => (c.id === id ? { ...c, ...patch } : c)),
     })),
 
   addItem: () =>

@@ -29,15 +29,23 @@ bite-share/
     |   |   |-- layout.tsx
     |   |   `-- page.tsx
     |   |-- components/
-    |   |   |-- item.tsx
-    |   |   |-- person.tsx
-    |   |   |-- split_summary.tsx
+    |   |   |-- item/
+    |   |   |   |-- item.tsx
+    |   |   |   `-- item_detail.tsx
+    |   |   |-- person/
+    |   |   |   |-- consumer_chip.tsx
+    |   |   |   |-- consumer_detail.tsx
+    |   |   |   `-- search_consumers.tsx
+    |   |   |-- upload_panel.tsx
     |   |   `-- ui/
     |   `-- lib/
-    |       |-- split_algorithm/
+    |       |-- bill/
     |       |   |-- bill.ts
     |       |   |-- index.ts
     |       |   `-- types.ts
+    |       |-- bill_store/
+    |       |   `-- useBillStore.ts
+    |       |-- uploadthing.ts
     |       `-- utils.ts
 ```
 
@@ -49,7 +57,9 @@ bite-share/
 - `frontend/src/components/`: shared UI and feature components.
 - `frontend/src/components/ui/`: shadcn-style primitives.
 - `frontend/src/lib/`: shared frontend utilities and domain logic.
-- `frontend/src/lib/split_algorithm/`: local bill split calculation.
+- `frontend/src/lib/bill/`: local bill split calculation and domain types.
+- `frontend/src/lib/bill_store/`: temporary browser-session bill state.
+- `frontend/src/lib/uploadthing.ts`: placeholder upload API shim for future receipt upload work.
 - `compose.yml`: local frontend orchestration.
 
 ## Notes
