@@ -38,6 +38,7 @@ bite-share/
     |   |   |   `-- search_consumers.tsx
     |   |   |-- upload_panel.tsx
     |   |   `-- ui/
+    |   |       `-- money_input.tsx
     |   `-- lib/
     |       |-- bill/
     |       |   |-- bill.ts
@@ -56,6 +57,7 @@ bite-share/
 - `frontend/src/app/`: App Router layout, global CSS, and home page.
 - `frontend/src/components/`: shared UI and feature components.
 - `frontend/src/components/ui/`: shadcn-style primitives.
+- `frontend/src/components/ui/money_input.tsx`: cents-keypad currency input.
 - `frontend/src/lib/`: shared frontend utilities and domain logic.
 - `frontend/src/lib/bill/`: local bill split calculation and domain types.
 - `frontend/src/lib/bill_store/`: temporary browser-session bill state.

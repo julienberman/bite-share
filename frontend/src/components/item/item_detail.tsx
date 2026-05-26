@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { MoneyInput } from "@/components/ui/money_input";
 import { useBillStore } from "@/lib/bill_store/useBillStore";
 import type { Item, Person } from "@/lib/bill";
 
@@ -14,43 +15,42 @@ type Props = {
 };
 
 export function ItemDetail({ item, consumers, onClose }: Props) {
-    const { setItemName, setItemPrice, toggleConsumer, removeItem } =
-        useBillStore();
+    const { setItemName, setItemPrice, toggleConsumer } = useBillStore();
     const [name, setName] = useState(item.name);
-    const [price, setPrice] = useState((item.priceCents / 100).toFixed(2));
 
     const handleSave = () => {
         setItemName(item.id, name.trim());
-        const cents = Math.round(parseFloat(price) * 100);
-        setItemPrice(item.id, isNaN(cents) ? 0 : cents);
-        onClose();
-    };
-
-    const handleRemove = () => {
-        removeItem(item.id);
         onClose();
     };
 
     return (
         <div className="flex flex-col gap-4">
-            <h3 className="text-lg font-semibold">Edit Item</h3>
+            <div className="flex items-center justify-between gap-4">
+                <h3 className="text-lg font-semibold">Edit Item</h3>
+                <Button type="button" onClick={handleSave}>
+                    Save
+                </Button>
+            </div>
             <div className="flex flex-col gap-2">
                 <Label htmlFor="name">Name</Label>
                 <Input
                     id="name"
                     value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => {
+                        setName(e.target.value);
+                        setItemName(item.id, e.target.value);
+                    }}
                     placeholder="Item name"
                 />
             </div>
             <div className="flex flex-col gap-2">
                 <Label htmlFor="price">Price</Label>
-                <Input
+                <MoneyInput
                     id="price"
-                    type="number"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    placeholder="0.00"
+                    valueCents={item.priceCents}
+                    onValueChange={(valueCents) =>
+                        setItemPrice(item.id, valueCents)
+                    }
                 />
             </div>
             <div className="flex flex-col gap-2">
@@ -73,15 +73,6 @@ export function ItemDetail({ item, consumers, onClose }: Props) {
                         );
                     })}
                 </div>
-            </div>
-            <div className="flex gap-2">
-                <Button onClick={handleSave}>Save</Button>
-                <Button variant="outline" onClick={onClose}>
-                    Cancel
-                </Button>
-                <Button variant="destructive" onClick={handleRemove}>
-                    Delete
-                </Button>
             </div>
         </div>
     );

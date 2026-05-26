@@ -49,10 +49,10 @@
 }
 
 :root {
-    --white: oklch(1 0 0);
-    --very-light: oklch(0.96 0.025 79);
-    --light: oklch(0.82 0.055 69);
-    --dark: oklch(0.24 0.045 48);
+    --white: oklch(0.99 0.006 83);
+    --very-light: oklch(0.94 0.028 78);
+    --light: oklch(0.76 0.07 67);
+    --dark: oklch(0.25 0.055 48);
     --card: var(--very-light);
     --card-foreground: var(--dark);
     --popover: var(--white);

@@ -22,7 +22,6 @@ export function SearchConsumers() {
             />
             {query.trim() && (
                 <ul className="absolute z-10 mt-1 w-full rounded-md border bg-popover shadow-md">
-                    {/* future: map over backend search results here */}
                     <li
                         onClick={handleSelect}
                         className="cursor-pointer px-3 py-2 text-sm hover:bg-accent"

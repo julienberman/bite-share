@@ -38,6 +38,8 @@ This document defines naming, formatting, and code-organization conventions.
 ## Tailwind CSS Style
 
 - Use Tailwind CSS v4 via `frontend/src/app/globals.css` and PostCSS plugin.
+- Use only the four core palette variables `--white`, `--very-light`, `--light`,
+  and `--dark`; map semantic framework tokens back to these colors.
 - Prefer utility classes directly in components for simple styling.
 - Extract shared visual primitives into `frontend/src/components/ui` when class
   sets repeat.

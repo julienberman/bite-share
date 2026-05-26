@@ -30,6 +30,7 @@ docker compose up --build
 
 - Frontend serves the single-page prototype from `frontend/src/app/page.tsx`.
 - Bill state stays in the browser session.
+- Money entry uses cents-keypad behavior for faster receipt entry.
 - Split calculation runs locally in `frontend/src/lib/bill`.
 - No backend, database, receipt upload, authentication, or external API is
   required for the current prototype.

@@ -7,9 +7,9 @@ import { ItemCard } from "@/components/item/item";
 import { ItemDetail } from "@/components/item/item_detail";
 import { useBillStore } from "@/lib/bill_store/useBillStore";
 import { canSplit, split } from "@/lib/bill";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { MoneyInput } from "@/components/ui/money_input";
 
 export default function Page() {
     const { consumers, items, totalCents, addItem, setTotal } = useBillStore();
@@ -22,56 +22,70 @@ export default function Page() {
 
     const editingItem = items.find((i) => i.id === editingItemId) ?? null;
 
-    const handleTotalBlur = (value: string) => {
-        const total = Number.parseFloat(value);
-        setTotal(Number.isFinite(total) ? Math.round(total * 100) : 0);
-    };
-
     return (
-        <main className="mx-auto flex max-w-2xl flex-col gap-8 p-8">
-            <h1 className="text-2xl font-bold">Split Bill</h1>
-
-            <section className="flex flex-col gap-3">
-                <h2 className="text-lg font-semibold">People</h2>
-                <SearchConsumers />
-                <div className="flex flex-wrap gap-2">
-                    {consumers.map((c) => (
-                        <ConsumerChip key={c.id} person={c} />
-                    ))}
+        <main className="mx-auto flex w-full max-w-6xl flex-col gap-8 p-4 sm:p-8">
+            <div className="flex flex-col gap-5 border-b border-border pb-6 sm:flex-row sm:items-end sm:justify-between">
+                <div className="flex flex-col gap-2">
+                    <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                        Dinner math, minus the group chat
+                    </p>
+                    <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                        Split Bill
+                    </h1>
                 </div>
-            </section>
 
-            <section className="flex flex-col gap-3">
-                <h2 className="text-lg font-semibold">Items</h2>
-                <div className="flex flex-wrap gap-3">
-                    {items.map((item) => (
-                        <ItemCard
-                            key={item.id}
-                            item={item}
-                            consumers={consumers}
-                            onClick={() => setEditingItemId(item.id)}
-                        />
-                    ))}
-                    <Button variant="outline" onClick={addItem}>
-                        + Add Item
-                    </Button>
-                </div>
-            </section>
+                <section className="flex w-full max-w-72 flex-col gap-2">
+                    <Label htmlFor="total">Bill total:</Label>
+                    <MoneyInput
+                        id="total"
+                        aria-label="Bill total"
+                        valueCents={totalCents}
+                        onValueChange={setTotal}
+                        className="h-11 text-lg font-semibold"
+                    />
+                </section>
+            </div>
 
-            <section className="flex flex-col gap-2">
-                <Label htmlFor="total">Total (with tax & tip)</Label>
-                <Input
-                    id="total"
-                    type="number"
-                    defaultValue={(totalCents / 100).toFixed(2)}
-                    onBlur={(e) => handleTotalBlur(e.target.value)}
-                    placeholder="0.00"
-                    className="max-w-40"
-                />
-            </section>
+            <div className="grid gap-6 lg:grid-cols-3">
+                <section className="flex flex-col gap-4 lg:col-span-1">
+                    <div className="flex h-20 flex-col justify-end gap-3">
+                        <h2 className="text-lg font-semibold">People</h2>
+                        <SearchConsumers />
+                    </div>
+                    <div className="flex min-h-48 flex-wrap content-start gap-2 border border-border bg-card p-4">
+                        {consumers.map((c) => (
+                            <ConsumerChip key={c.id} person={c} />
+                        ))}
+                    </div>
+                </section>
+
+                <section className="flex flex-col gap-4 lg:col-span-2">
+                    <div className="flex h-20 flex-col justify-end gap-3 sm:flex-row sm:items-end sm:justify-between">
+                        <h2 className="text-lg font-semibold">Items</h2>
+                        <Button
+                            type="button"
+                            variant="outline"
+                            onClick={addItem}
+                            className="h-8 w-full sm:w-auto"
+                        >
+                            + Add Item
+                        </Button>
+                    </div>
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                        {items.map((item) => (
+                            <ItemCard
+                                key={item.id}
+                                item={item}
+                                consumers={consumers}
+                                onClick={() => setEditingItemId(item.id)}
+                            />
+                        ))}
+                    </div>
+                </section>
+            </div>
 
             {shares && (
-                <section className="flex flex-col gap-2">
+                <section className="ml-auto flex w-full max-w-md flex-col gap-2 border border-border bg-card p-4">
                     <h2 className="text-lg font-semibold">Each person owes</h2>
                     {consumers.map((c) => (
                         <div key={c.id} className="flex justify-between">
@@ -85,8 +99,14 @@ export default function Page() {
             )}
 
             {editingItem && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black/50">
-                    <div className="w-96 rounded-lg bg-background p-6 shadow-lg">
+                <div
+                    className="fixed inset-0 flex items-center justify-center bg-foreground/60 p-4"
+                    onClick={() => setEditingItemId(null)}
+                >
+                    <div
+                        className="w-full max-w-md border border-border bg-background p-6 shadow-lg"
+                        onClick={(event) => event.stopPropagation()}
+                    >
                         <ItemDetail
                             item={editingItem}
                             consumers={consumers}

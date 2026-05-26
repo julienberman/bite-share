@@ -11,7 +11,7 @@ type Props = {
 };
 
 export function ItemCard({ item, consumers, onClick }: Props) {
-    const { toggleConsumer } = useBillStore();
+    const { removeItem, toggleConsumer } = useBillStore();
 
     const assignedConsumers = consumers.filter((c) =>
         item.consumerIds.includes(c.id),
@@ -26,18 +26,47 @@ export function ItemCard({ item, consumers, onClick }: Props) {
         if (consumerId) toggleConsumer(item.id, consumerId);
     };
 
+    const handleRemove = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.stopPropagation();
+        removeItem(item.id);
+    };
+
     return (
         <Card
             onClick={onClick}
             onDragOver={handleDragOver}
             onDrop={handleDrop}
-            className="relative flex h-32 w-48 cursor-pointer flex-col rounded-lg p-3 hover:bg-accent"
+            className="relative flex min-h-36 w-full cursor-pointer flex-col p-4 hover:bg-accent"
         >
-            <div className="flex justify-between">
-                <span className="font-medium">
+            <button
+                type="button"
+                aria-label={`Delete ${item.name || "item"}`}
+                onClick={handleRemove}
+                className="absolute right-2 top-2 inline-flex size-7 items-center justify-center text-muted-foreground transition-colors hover:bg-background hover:text-foreground"
+            >
+                <svg
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    className="size-4"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="1.8"
+                >
+                    <path d="M4 7h16" />
+                    <path d="M10 11v6" />
+                    <path d="M14 11v6" />
+                    <path d="M6 7l1 14h10l1-14" />
+                    <path d="M9 7V4h6v3" />
+                </svg>
+            </button>
+
+            <div className="flex max-w-[calc(100%-2rem)] flex-col gap-1">
+                <span className="truncate text-sm font-semibold">
                     {item.name || "Unnamed item"}
                 </span>
-                <span className="text-sm text-muted-foreground">
+                <span className="text-lg font-semibold tabular-nums text-muted-foreground">
                     ${(item.priceCents / 100).toFixed(2)}
                 </span>
             </div>
