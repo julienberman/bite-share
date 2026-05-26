@@ -1,18 +1,14 @@
-import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import type { Metadata } from "next";
+import "./globals.css";
+
+import { Link } from "@/components/ui/link";
+import { cn } from "@/lib/utils";
 import {
   Geist,
   Geist_Mono,
   JetBrains_Mono,
   Public_Sans,
 } from "next/font/google";
-import { extractRouterConfig } from "uploadthing/server";
-
-import { uploadRouter } from "@/app/api/uploadthing/core";
-import { Button } from "@/components/ui/button";
-import { Link } from "@/components/ui/link";
-import { cn } from "@/lib/utils";
-import "./globals.css";
 
 const publicSans = Public_Sans({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -32,8 +28,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "bite-share",
-  description: "Full-stack project template scaffold",
+  title: "BiteShare",
+  description: "Split a night out with friends.",
 };
 
 export default function RootLayout({
@@ -60,14 +56,8 @@ export default function RootLayout({
             <p className="hidden text-center text-xs uppercase tracking-[0.18em] text-muted-foreground sm:block">
               Split a night out with friends. No receipt math.
             </p>
-
-            <nav className="flex items-center justify-end gap-2">
-              <Button asChild size="nav" variant="ghost">
-                <a href="/sign-in">Sign In</a>
-              </Button>
-            </nav>
+            <div />
           </header>
-          <NextSSRPlugin routerConfig={extractRouterConfig(uploadRouter)} />
           <div className="py-8">{children}</div>
         </div>
       </body>

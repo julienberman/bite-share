@@ -23,7 +23,7 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           run_install: false
-          package_json_file: frontend/package.json 
+          package_json_file: frontend/package.json
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
@@ -46,7 +46,7 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           run_install: false
-          package_json_file: frontend/package.json 
+          package_json_file: frontend/package.json
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
@@ -69,7 +69,7 @@ jobs:
         uses: pnpm/action-setup@v4
         with:
           run_install: false
-          package_json_file: frontend/package.json 
+          package_json_file: frontend/package.json
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
@@ -82,57 +82,3 @@ jobs:
       - name: Format
         working-directory: frontend
         run: pnpm run format:check
-
-  backend-lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Install Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-      - name: Install uv
-        uses: astral-sh/setup-uv@v5
-      - name: Install dependencies
-        working-directory: backend
-        run: uv sync --frozen
-      - name: Lint
-        working-directory: backend
-        run: uv run ruff check .
-
-  backend-typecheck:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Install Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-      - name: Install uv
-        uses: astral-sh/setup-uv@v5
-      - name: Install dependencies
-        working-directory: backend
-        run: uv sync --frozen
-      - name: Typecheck
-        working-directory: backend
-        run: uv run mypy .
-
-  backend-format:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Install Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-      - name: Install uv
-        uses: astral-sh/setup-uv@v5
-      - name: Install dependencies
-        working-directory: backend
-        run: uv sync --frozen
-      - name: Format
-        working-directory: backend
-        run: uv run ruff format --check .

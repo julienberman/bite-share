@@ -1,39 +1,26 @@
 # Data
 
-Bite Share currently uses a stateless prototype flow. The frontend holds the
-working bill state, UploadThing stores receipt image uploads, OpenAI extracts
-receipt data from uploaded image URLs, and the backend calculates splits from
-request payloads.
+Bite Share currently uses a frontend-only prototype flow. The browser owns the
+temporary bill state and the frontend split algorithm calculates shares locally.
 
-MongoDB and Redis remain available in the local stack for future persistence,
-cache, and queue workflows.
+MongoDB, Redis, authentication, receipt upload, and backend APIs are future work.
 
 
 ## Environment Mapping
 
-- `DATABASE_URL`: MongoDB connection string used by backend runtime.
-- `DATABASE_NAME`: MongoDB database name used by backend runtime.
-- `REDIS_URL`: Redis connection string reserved for cache or queue workflows.
-- `FRONTEND_ORIGIN`: allowed browser origin for backend CORS.
-- `NEXT_PUBLIC_API_URL`: frontend browser URL for the FastAPI backend.
-- `OPENAI_API_KEY`: server-side OpenAI API key for receipt extraction.
-- `OPENAI_MODEL`: OpenAI model used by receipt extraction.
-- `UPLOADTHING_TOKEN`: UploadThing token used by the Next.js upload route.
+- No environment variables are required for the current prototype.
 
 
 ## Data Ownership
 
-- Frontend state owns the temporary bill during the prototype session.
-- UploadThing stores receipt image files and returns URLs to the frontend.
-- OpenAI receives uploaded receipt image URLs and returns structured items.
-- Backend `Bill.split()` owns split calculation logic.
-- MongoDB is reserved for future bill persistence and receipt metadata.
-- Redis stores transient data only, such as cache entries, short-lived locks,
-  and queue state.
+- Frontend state owns people, items, assignments, and optional final total during
+  the prototype session.
+- `frontend/src/lib/split_algorithm` owns split calculation logic.
+- Future backend services may own persistence, authentication, receipt parsing,
+  and shared bill workflows.
 
 
 ## Local Development
 
-- Docker Compose service `database` runs MongoDB on the internal Compose network.
-- Docker Compose service `redis` runs Redis on the internal Compose network.
-- Backend receives all data service configuration from `.env`.
+- Docker Compose service `frontend` runs the Next.js app.
+- No local database, cache, backend service, or external API is required.
